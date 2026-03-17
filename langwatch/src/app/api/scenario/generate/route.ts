@@ -117,7 +117,13 @@ export async function POST(req: NextRequest) {
 
     // Ensure the generated scenario includes labels (defaulting to empty array)
     // to match the ScenarioConfig schema expected by the scenario runner
-    return NextResponse.json({ scenario: { ...result.object, labels: [] } });
+    // Preserve existing labels when refining a scenario
+    return NextResponse.json({
+      scenario: {
+        ...result.object,
+        labels: currentScenario?.labels ?? [],
+      },
+    });
   } catch (error) {
     logger.error({ error }, "Error generating scenario");
 
