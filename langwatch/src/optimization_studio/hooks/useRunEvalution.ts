@@ -127,7 +127,11 @@ export const useRunEvalution = () => {
       const hasChanges =
         latestVersion?.autoSaved &&
         (previousVersion?.dsl
-          ? hasDSLChanged(workflow, previousVersion.dsl, false)
+          ? hasDSLChanged({
+              dslCurrent: workflow,
+              dslPrevious: previousVersion.dsl,
+              includeExecutionStates: false,
+            })
           : true);
 
       let versionId =

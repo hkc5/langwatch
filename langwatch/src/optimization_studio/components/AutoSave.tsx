@@ -65,11 +65,11 @@ export function AutoSave() {
           return;
         }
 
-        const setAsLatestVersion = hasDSLChanged(
-          baselineWorkflow,
-          stateWorkflow,
-          false,
-        );
+        const setAsLatestVersion = hasDSLChanged({
+          dslCurrent: baselineWorkflow,
+          dslPrevious: stateWorkflow,
+          includeExecutionStates: false,
+        });
         autosave.mutate(
           {
             projectId: project.id,

@@ -434,7 +434,11 @@ export const store = (
     if (!baselineWorkflow || !currentWorkflow) {
       return false;
     }
-    return hasDSLChanged(baselineWorkflow, currentWorkflow, true);
+    return hasDSLChanged({
+      dslCurrent: baselineWorkflow,
+      dslPrevious: currentWorkflow,
+      includeExecutionStates: true,
+    });
   },
   setWorkflow: (
     workflow: Partial<Workflow> | ((current: Workflow) => Partial<Workflow>),
@@ -481,7 +485,11 @@ export const store = (
     if (!lastCommitted || !currentWorkflow) {
       return false;
     }
-    return hasDSLChanged(currentWorkflow, lastCommitted, false);
+    return hasDSLChanged({
+      dslCurrent: currentWorkflow,
+      dslPrevious: lastCommitted,
+      includeExecutionStates: false,
+    });
   },
   setSocketStatus: (
     status: SocketStatus | ((status: SocketStatus) => SocketStatus),

@@ -356,7 +356,11 @@ export const useVersionState = ({
     (version) => version.isLatestVersion,
   );
   const hasChanges = autosavedWorkflow
-    ? hasDSLChanged(getWorkflow(), autosavedWorkflow, false)
+    ? hasDSLChanged({
+        dslCurrent: getWorkflow(),
+        dslPrevious: autosavedWorkflow,
+        includeExecutionStates: false,
+      })
     : false;
 
   const canSaveNewVersion =

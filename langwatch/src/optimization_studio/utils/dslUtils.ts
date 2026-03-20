@@ -36,11 +36,15 @@ export const clearDsl = (
   };
 };
 
-export const hasDSLChanged = (
-  dslCurrent: z.infer<typeof workflowJsonSchema>,
-  dslPrevious: z.infer<typeof workflowJsonSchema>,
-  includeExecutionStates: boolean,
-) => {
+export const hasDSLChanged = ({
+  dslCurrent,
+  dslPrevious,
+  includeExecutionStates,
+}: {
+  dslCurrent: z.infer<typeof workflowJsonSchema>;
+  dslPrevious: z.infer<typeof workflowJsonSchema>;
+  includeExecutionStates: boolean;
+}) => {
   return (
     JSON.stringify(
       recursiveAlphabeticallySortedKeys(
